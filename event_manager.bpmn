@@ -11,6 +11,13 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_1d580f9" sourceRef="generateEventTask" targetRef="getListOfVendors" />
     <bpmn:serviceTask id="getListOfVendors" name="Get List of Vendors">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="list">
+            <camunda:list />
+          </camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1d580f9</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_03l8rru</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -18,12 +25,12 @@
     <bpmn:subProcess id="Task_0jh7cuw">
       <bpmn:incoming>SequenceFlow_03l8rru</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1x70nyr</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="list" />
       <bpmn:startEvent id="StartEvent_07z8nii">
         <bpmn:outgoing>SequenceFlow_1siyinv</bpmn:outgoing>
       </bpmn:startEvent>
       <bpmn:sequenceFlow id="SequenceFlow_1siyinv" sourceRef="StartEvent_07z8nii" targetRef="Task_053gur9" />
-      <bpmn:callActivity id="Task_053gur9" name="Send Quote" calledElement="vendor">
+      <bpmn:callActivity id="Task_053gur9" name="Vendor Process" calledElement="vendor">
         <bpmn:incoming>SequenceFlow_1siyinv</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_041xd4l</bpmn:outgoing>
       </bpmn:callActivity>
